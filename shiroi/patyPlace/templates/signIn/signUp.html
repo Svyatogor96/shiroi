@@ -1,0 +1,39 @@
+{% extends 'party/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wrap-login100">
+
+
+    <div class="login100-form">
+        <div style="padding-left: 33%;">
+            <span class="login100-form-title">
+                Регистрация
+            </span>
+
+            <form action="{% url 'signUp' %}" method="post" class="signUp">
+                {% csrf_token %}
+                {% for f in form %}
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    {{ f }}
+                </div>
+                <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
+
+
+                <button class="login100-form-btn" style="color: black;">
+                    Зарегистрироваться
+                </button>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="{% url 'signIn' %}">
+                        Уже есть аккаунт ? Войдите
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'party/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+        <span>
+        </span>
+    </label>
+    <ul class="menu__box" id="paty">
+        <li>
+            <h1>{{partyses.paty0.title}}</h1>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty0.dt}}
+                </div>
+                <div class="patyDescription_leftMenu" style="padding-bottom:50px; padding-top:16px;">
+                    {{ partyses.paty0.description}}
+                </div>
+                <div class="patyDescription_leftMenu" style="display: block;">
+                    <img src=media/{{partyses.paty0.images}} alt="" class="right-menu-img"
+                        style="margin-left: 0px; height: 150px;">
+                </div>
+                <div class="login100-form-btn" style="margin-top: 20px;"> Пойду </div>
+        </li>
+    </ul>
+    <ul class="menu__box" id="paty-info">
+        <li>
+            <h1>Ближайшие события</h1>
+        </li>
+        {% if count == 3 %} <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty0.title }}
+                    {{ partyses.paty0.dt}}
+                </div>
+                <img src=media/{{partyses.paty0.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="{% url 'gofunc' %}" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty1.title}}</h6>
+                </button>
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty2.title }}
+                    {{ partyses.paty2.dt}}
+                </div>
+                <img src=media/{{partyses.paty2.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="{% url 'gofunc' %}" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty2.title}}</h6>
+                </button>
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty1.title }}
+                    {{ partyses.paty1.dt}}
+                </div>
+                <img src=media/{{partyses.paty0.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="{% url 'gofunc' %}" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty0.title}}</h6>
+                </button>
+            </div>
+        </li>
+        {% endif %}
+        {% if count == 2 %}
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty0.title }}
+                    {{ partyses.paty0.dt}}
+                </div>
+                <img src=media/{{partyses.paty0.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="{% url 'gofunc' %}" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty0.title}}</h6>
+                </button>
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty1.title }}
+                    {{ partyses.paty1.dt}}
+                </div>
+                <img src=media/{{partyses.paty1.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="{% url 'gofunc' %}" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty1.title}}</h6>
+                </button>
+            </div>
+        </li>
+        {% endif %}
+        {% if count == 1 %} <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ partyses.paty0.title }}
+                    {{ partyses.paty0.dt}}
+                </div>
+                <img src=media/{{partyses.paty0.images}} alt="" class="left-menu-img">
+                <button class="go_btn"><a href="#" class="a_none_href"> Пойду </a>
+                    <h6 class="invisible">{{partyses.paty0.title}}</h6>
+                </button>
+            </div>
+        </li>
+        {% endif %}
+        {% if count == 0 %}
+        <li>
+            <h2>Ближайших мероприятий не наблюдает</h2>
+        </li>
+        {% endif %}
+        <div class="container-login100-form-btn">
+            {% if user.is_authenticated %}
+            <button class="login100-form-btn">
+                <a href="{% url 'createParty' %}" class="logout">Создать</a>
+            </button>
+            {% endif %}
+        </div>
+    </ul>
+    <div class="map" id="map"></div>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=7185e67d-b181-4cbd-ad9d-e548268ca289"
+        type="text/javascript"></script>
+    <script src="{% static 'party/js/jquery.js'%}"></script>
+    <script src="{% static 'party/js/script.js' %}"></script>
+    <script src="{% static 'party/js/gobtnEvent.js'%}"></script>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'party/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="wrap-login100">
+    <div class="login-content">
+        <span class="login100-form-title">
+            Вход
+        </span>
+
+        <form action="{% url 'signIn' %}" method="post" class="signIn">
+            {% csrf_token %}
+            <div class='form-error'>{{ form.non_field_errors }}</div>
+
+            {{ form.username }}
+            <div class="form-error">{{ f.errors }}</div>
+            {{ form.password }}
+
+
+            <button class="login100-form-btn">
+                Вход
+            </button>
+            <div class="text-center p-t-12">
+                <span class="txt1">
+                    Забыли
+                </span>
+                <a class="txt2" href="#">
+                    Логин / Пароль ?
+                </a>
+            </div>
+
+            <div class="text-center p-t-136">
+                <a class="txt2" href="{% url 'signUp' %}">
+                    Зарегистрируйтесь
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

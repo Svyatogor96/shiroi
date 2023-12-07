@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href='{% static "party/css/style.css" %}'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap Bundle JS (jsDelivr CDN) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'party/css/air-datepicker.css' %}">
+    <script src="{% static 'party/js/air-datepicker.js' %}"></script>
+</head>
+
+<body class="body">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" id="mypage" href="{% url 'mypage'%}">Моя страница</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+                    <li>
+                        <a class="logout" href="{% url 'home' %}">Главная</a>
+                    </li>
+                </ul>
+                {% if user.is_authenticated %}
+                <li class="last" id="navbar-account">
+                    <button class="user-dropdown">{{user.username}} </button>| <a href="{% url 'logout' %}"
+                        class="logout">Выйти</a>
+
+                </li>
+                {% else %}
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                    <li><a class="dropdown-item" href="{% url 'signUp' %}">Регистрация</a></li>
+                    <li><a class="dropdown-item" id="signIn" href="{% url 'signIn' %}">Вход</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <ul class="user_box" style="list-style: none;">
+        <li class="dropdown-list-item-1" id="fist_drop_item">{{ us.username }}</li>
+        <li class="dropdown-list-item-1" id="other_info">ФИО: {{us.name}}, {{us.last_name}}</li>
+        <li class="dropdown-list-item-1" id="other_info">email: {{us.email}}</li>
+        <li></li>
+        <li></li>
+        <li class="dropdown-list-item-1" id="last_event">Последние мероприятия</li>
+        {% if countOldPaty == 3 %} <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty0.title }}
+                    {{ oldPartys.oldPaty0.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty0.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty2.title }}
+                    {{ oldPartys.oldPaty2.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty2.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty1.title }}
+                    {{ oldPartys.oldPaty1.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty1.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        {% endif %}
+        {% if countOldPaty == 2 %}
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty0.title }}
+                    {{ oldPartys.oldPaty0.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty0.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty1.title }}
+                    {{ oldPartys.oldPaty1.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty1.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        {% endif %}
+        {% if countOldPaty == 1 %} <li>
+            <div class="paty-left-menu">
+                <div class="patyDescription_leftMenu">
+                    {{ oldPartys.oldPaty0.title }}
+                    {{ oldPartys.oldPaty0.dt }}
+                </div>
+                <img src=media/{{oldPartys.oldPaty0.images}} alt="" class="right-menu-img ">
+            </div>
+        </li>
+        {% endif %}
+    </ul>
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+<script src="{% static 'party/js/user-box.js' %}"></script>
+<script src="{% static 'party/js/dropdown.js'%}"></script>
+
+</html>

@@ -1,0 +1,18 @@
+{% extends 'party/base.html' %}
+
+{% block content %}
+<div
+    style="text-align: center; background-color:white; border-radius:12px; margin-left: 30%; margin-right:30%; margin-top:20%">
+    <div style="display: block; padding: 20px;">
+        <h1>Желаете удалить вечеринку ?</h1>
+    </div>
+    <div style="display: block; padding: 10px;">
+        <form action="" method="post">
+            {% csrf_token %}
+            <button class="delete-button" style="width:400px; background-color:brown; margin-bottom: 12px"
+                type="submit">Удалить</button>
+        </form>
+        <a class="delete-button" style="width:400px; background-color:darkgreen" href="{% url 'home' %}">Отмена</a>
+    </div>
+</div>
+{% endblock %}

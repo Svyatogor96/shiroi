@@ -1,0 +1,47 @@
+{% extends 'party/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="myprofile">
+    <h1>{{ username }}</h1>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Заголовок</th>
+                    <th scope="col">Количество человек</th>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Место</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in party %}
+                <tr>
+                    <td> {{ p.title }} </td>
+                    <td>{{ p.countPeople }}</td>
+                    <td>{{ p.dt }}</td>
+                    <td>{{ p.adres }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropdown_button">...</button>
+                            <ul class="dropdown_list">
+                                <li class="dropdown-list-item"><a href="{% url 'updatePaty' p.pk %}">Редактировать</a>
+                                </li>
+                                <li class="dropdown-list-item"><a href="{% url 'deletePaty' p.pk %}">Удалить</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<a href="{% url 'signUp' %}">Эта страница только для зарегистрированных пользователей</a>
+{% endif %}
+
+
+{% endblock %}

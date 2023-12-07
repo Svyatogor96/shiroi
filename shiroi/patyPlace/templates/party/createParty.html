@@ -1,0 +1,23 @@
+{% extends 'party/base.html' %}
+
+{% block content %}
+<div class="wrap-createParty">
+    <form method="post" enctype="multipart/form-data">
+        <div class="">
+            <h2>Новая Парти</h2>
+        </div>
+        {% csrf_token %}
+        {% for f in form %}
+        <p><span> {{f.label}}: </span>
+        <div class=""> {{f}} </div>
+        {% endfor %}
+        <div class="">
+            <button class="createParty100-form-btn" type="submit">Добавить</button>
+        </div>
+    </form>
+    <script>
+        new AirDatepicker('#airdatepicker')
+    </script>
+</div>
+
+{% endblock %}
